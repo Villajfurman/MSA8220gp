@@ -6,7 +6,7 @@ This is the repository for the final project in MSA8220. The document below will
 
 ### round 1 data set
 
-| **column | original format | new format** |
+**| column | original format | new format |**
 |-|-|-|
 | ``field name`` | format 1 | format 2 |
 
