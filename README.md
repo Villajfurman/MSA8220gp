@@ -2,25 +2,44 @@
 
 This is the repository for the final project in MSA8220. The document below will call out the steps involved in the process for the model.
 
-## Format Changes
+## Step 1 - Data Review
 
 ### *round 1 data set*
 
 | **column** | **original format** | **new format** |
 |-|-|-|
-| ``field name`` | format 1 | format 2 |
-
-### *round 2 data set*
-
-| **column** | **original format** | **new format** |
-|-|-|-|
-| ``field name`` | format 1 | format 2 |
-
-### *round 3 data set*
-
-| **column** | **original format** | **new format** |
-|-|-|-|
-| ``field name`` | format 1 | format 2 |
+| ``gender`` | numeric, continuous | numeric, nominal |
+| ``married`` | numeric, continuous | numeric, nominal |
+| ``nkid`` | numeric, continuous | no change |
+| ``nativity`` | character, nominal | numeric, nominal |
+| ``race`` | numeric, continuous | numeric, nominal |
+| ``span`` | character, nominal | numeric, nominal |
+| ``cars`` | format 1 | format 2 |
+| ``prevhome`` | format 1 | format 2 |
+| ``region`` | format 1 | format 2 |
+| ``UnitRating`` | format 1 | format 2 |
+| ``NbhdRating`` | format 1 | format 2 |
+| ``VeryLoINC`` | format 1 | format 2 |
+| ``LoINC`` | format 1 | format 2 |
+| ``MedianLoINC`` | format 1 | format 2 |
+| ``bath`` | format 1 | format 2 |
+| ``bed`` | format 1 | format 2 |
+| ``built`` | format 1 | format 2 |
+| ``condo`` | format 1 | format 2 |
+| ``floors`` | format 1 | format 2 |
+| ``garage`` | format 1 | format 2 |
+| ``lot`` | format 1 | format 2 |
+| ``psewer`` | format 1 | format 2 |
+| ``rooms`` | format 1 | format 2 |
+| ``sqft`` | format 1 | format 2 |
+| ``value`` | format 1 | format 2 |
+| ``downpct`` | format 1 | format 2 |
+| ``downpay`` | format 1 | format 2 |
+| ``helc`` | format 1 | format 2 |
+| ``helump`` | format 1 | format 2 |
+| ``purchdate`` | format 1 | format 2 |
+| ``HiEducInc`` | format 1 | format 2 |
+| ``VeryLoINC`` | format 1 | format 2 |
 
 ## Missing Values
 
