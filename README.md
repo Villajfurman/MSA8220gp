@@ -8,7 +8,7 @@ This is the repository for the final project in MSA8220. The document below will
 
 | **column** | **original format** | **new format** |
 |-|-|-|
-| ``age`` | character, nominal | numeric, nominal |
+| ``age`` | character, nominal | numeric, continuous |
 | ``gender`` | numeric, continuous | numeric, nominal |
 | ``married`` | numeric, continuous | numeric, nominal |
 | ``nkid`` | numeric, continuous | no change |
@@ -43,9 +43,11 @@ This is the repository for the final project in MSA8220. The document below will
 
 ## Step 2 - Column Overview
 
-19 Categorical Variable
-12 Numeric Variables
-6 Missing Values
+**Categorical Variable** - 19
+**Continuous Variables** - 12
+**Missing Values** - 6
+
+**Issues**
 
 
 ## Missing Values
