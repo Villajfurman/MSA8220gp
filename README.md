@@ -50,8 +50,13 @@ This is the repository for the final project in MSA8220. The document below will
 **Missing Values** - 6
 
 **Issues**
-
-
+  *Age* - date values
+  *bath* - zero values
+  *bed* - zero values
+  *floors* - high values - ex. "21"
+  *lot* - high values - "999998"
+  *sqft* - low values - "99"
+  
 ## Missing Values
 
 Right now, we’re in your first GitHub **repository**. A repository is like a folder or storage space for your project. Your project's repository contains all its files such as code, documentation, images, and more. It also tracks every change that you—or your collaborators—make to each file, so you can always go back to previous versions of your project if you make any mistakes.
