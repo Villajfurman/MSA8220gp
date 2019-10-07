@@ -44,7 +44,9 @@ This is the repository for the final project in MSA8220. The document below will
 ## Step 2 - Column Overview
 
 **Categorical Variable** - 19
+
 **Continuous Variables** - 12
+
 **Missing Values** - 6
 
 **Issues**
