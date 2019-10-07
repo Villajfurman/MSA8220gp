@@ -2,12 +2,13 @@
 
 This is the repository for the final project in MSA8220. The document below will call out the steps involved in the process for the model.
 
-## Step 1 - Data Review
+## Step 1 - Column Format Changes
 
 ### *round 1 data set*
 
 | **column** | **original format** | **new format** |
 |-|-|-|
+| ``age`` | character, nominal | numeric, nominal |
 | ``gender`` | numeric, continuous | numeric, nominal |
 | ``married`` | numeric, continuous | numeric, nominal |
 | ``nkid`` | numeric, continuous | no change |
@@ -39,6 +40,13 @@ This is the repository for the final project in MSA8220. The document below will
 | ``helump`` | numeric, continuous | numeric, nominal |
 | ``purchdate`` | numeric, continuous | numeric, ordinal |
 | ``HiEducInc`` | numeric, continuous | numeric, nominal |
+
+## Step 2 - Column Overview
+
+19 Categorical Variable
+12 Numeric Variables
+6 Missing Values
+
 
 ## Missing Values
 
