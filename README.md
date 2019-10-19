@@ -11,9 +11,8 @@
 	Hence 500 cost/lost for a false positive.
 	Anyone outside of warm lead (true negative) & (false negative) are not included since no marketing and no enroll.
 
-
-# Part 1 - Submit one column with "best" predictions for each of the 10k households
-# Indicate whether each is or is NOT a "warm lead".
+## Part 1 - Submit one column with "best" predictions for each of the 10k households
+#### Indicate whether each is or is NOT a "warm lead".
 
 ##################
 # Data Overview
