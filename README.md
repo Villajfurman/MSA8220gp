@@ -78,6 +78,10 @@ Dependent variable
 
 #### *Column Viewer*
 
+JMP:
+
+	- Cols => Columns Viewer => Select All Columns => Check Show Quartiles => Show Summary
+
 *Variables of question*
 
 | *column* | **N** | **N Missing** | **N Categories** | **Suspect** |
@@ -116,12 +120,14 @@ Dependent variable
 | ``HiEducInc``   | 10,000 |   0 |    NA | Cont. => Cat 		|
 
 Notes:
+
 	- New Column maybe Income?
 	- low  - 0 - 34,000
 	- med  - >34,000 - 55,000
 	- high - >55,000
 
-	- Check Values
+Check Values
+
 	- AGE - age_2              => See date year format
 	- VeryLoINC - VeryLoINC_2  => max 70K? 24K - 34K range (9200)
 	- LoINC - LoINC_2          => max 114K? 39K - 53K range (13600)
@@ -135,7 +141,7 @@ Other Info:
 	- bed         => Seeing "0" possibly missing
 	- bath        => Seeing "0" possibly missing
 
-* New Columns *
+*New Columns*
 
 | **column** | **original format** | **new format** | **column** |
 |-|-|-|-|
@@ -172,11 +178,11 @@ Other Info:
 | ``purchdate``   | numeric, continuous | numeric, ordinal    | ``purchdate_2``  |
 | ``HiEducInc``   | numeric, continuous | numeric, nominal    | ``HiEducInc_2``  |
 
-#########################
-#### Column Viewer 2 ####
-#########################
+#### *Column Viewer 2*
 
-Cols => Columns Viewer => Select All Columns, Check Show Quartiles, Show Summary
+JMP:
+
+	- Cols => Columns Viewer => Select All Columns => Check Show Quartiles => Show Summary
 
 - age_2 - date caculation for new age value
 
