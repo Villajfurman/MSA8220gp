@@ -115,61 +115,62 @@ Dependent variable
 | ``purchdate``   | 10,000 |   0 |    NA | Cont. => Cat 		|
 | ``HiEducInc``   | 10,000 |   0 |    NA | Cont. => Cat 		|
 
-Notes
-	New Column - Income
-	low  - 0 - 34,000
-	med  - >34,000 - 55,000
-	high - >55,000
+Notes:
+	- New Column maybe Income?
+	- low  - 0 - 34,000
+	- med  - >34,000 - 55,000
+	- high - >55,000
 
-	Check Values
-	AGE - age_2 => See date year format
-	VeryLoINC - VeryLoINC_2 => max 70K? 24K - 34K range (9200)
-	LoINC - LoINC_2 => max 114K? 39K - 53K range (13600)
-	MedianINC - MedianINC_2 => low 38K? 60K - 74K range (13700)
-	SQFT - sqft_2 => low 99? => except for low seems legit
-	VALUE - value_2 => low 1? => except for low seems legit
+	- Check Values
+	- AGE - age_2              => See date year format
+	- VeryLoINC - VeryLoINC_2  => max 70K? 24K - 34K range (9200)
+	- LoINC - LoINC_2          => max 114K? 39K - 53K range (13600)
+	- MedianINC - MedianINC_2  => low 38K? 60K - 74K range (13700)
+	- SQFT - sqft_2            => low 99?  => except for low seems legit
+	- VALUE - value_2          => low 1?   => except for low seems legit
 
-	Other Info
-	NbhdRating => Seeing "0" when scale is 1-10
-	bed => Seeing "0" possibly missing
-	bath => Seeing "0" possibly missing
+Other Info:
 
-*** New Columns ***
+	- NbhdRating  => Seeing "0" when scale is 1-10
+	- bed         => Seeing "0" possibly missing
+	- bath        => Seeing "0" possibly missing
+
+* New Columns *
 
 | **column** | **original format** | **new format** | **column** |
 |-|-|-|-|
-| ``age`` | character, nominal | numeric, continuous | ``age_2`` |
-| ``gender`` | numeric, continuous | numeric, nominal | ``gender_2`` |
-| ``married`` | numeric, continuous | numeric, nominal | ``married_2`` |
-| ``nkid`` | numeric, continuous | no change | ``nkid_2`` |
-| ``nativity`` | character, nominal | numeric, nominal | ``natvty_2`` |
-| ``race`` | numeric, continuous | numeric, nominal | ``race_2`` |
-| ``span`` | character, nominal | numeric, nominal | ``span_2`` |
-| ``cars`` | numeric, continuous | no change | ``cars_2`` |
-| ``prevhome`` | character, nominal | no change | ``prevhome_2`` |
-| ``region`` | numeric, continuous | numeric, nominal | ``region_2`` |
-| ``UnitRating`` | numeric, continuous | numeric, ordinal | ``UnitRating_2`` |
-| ``NbhdRating`` | numeric, continuous | numeric, ordinal | ``NbhdRating_2`` |
-| ``VeryLoINC`` | numeric, continuous | no change | ``VeryLoINC_2`` |
-| ``LoINC`` | numeric, continuous | no change | ``LoINC_2`` |
-| ``MedianLoINC`` | numeric, continuous | no change | ``MedianLoINC`` | 
-| ``bath`` | numeric, continuous | no change | ''bath_2 |
-| ``bed`` | numeric, continuous | no change | ''bed_2'' |
-| ``built`` | numeric, continuous | numeric, ordinal | ``built_2`` |
-| ``condo`` | numeric, continuous | numeric, nominal | ``condo_2`` |
-| ``floors`` | numeric, continuous | no change | ''floors_2'' |
-| ``garage`` | numeric, continuous | numeric, nominal | ``garage_2` |
-| ``lot`` | numeric, continuous | no change | ''lot_2"" |
-| ``psewer`` | numeric, continuous | numeric, nominal | ``psewer_2`` |
-| ``rooms`` | numeric, continuous | no change | ``rooms_2`` |
-| ``sqft`` | character, nominal | numeric, continuous | ``sqft_2`` |
-| ``value`` | character, nominal | numeric, continuous | ``value_2`` |
-| ``downpct`` | character, nominal | no change | ``downpct_2`` |
-| ``downpay`` | character, nominal | no change | ``downpay_2`` |
-| ``helc`` | numeric, continuous | numeric, nominal | ``helc_2`` |
-| ``helump`` | numeric, continuous | numeric, nominal | ``helump_2`` |
-| ``purchdate`` | numeric, continuous | numeric, ordinal | ``purchdate_2`` |
-| ``HiEducInc`` | numeric, continuous | numeric, nominal | ``HiEducInc_2`` |
+| ``age`` 	  | character, nominal  | numeric, continuous | ``age_2``	 |
+| ``gender`` 	  | numeric, continuous | numeric, nominal    | ``gender_2``	 |
+| ``married``     | numeric, continuous | numeric, nominal    | ``married_2``	 |
+| ``nkid`` 	  | numeric, continuous | no change 	      | ``nkid_2``	 |
+| ``nativity``    | character, nominal  | numeric, nominal    | ``natvty_2`` 	 |
+| ``race`` 	  | numeric, continuous | numeric, nominal    | ``race_2`` 	 |
+| ``span`` 	  | character, nominal  | numeric, nominal    | ``span_2`` 	 |
+| ``cars`` 	  | numeric, continuous | no change 	      | ``cars_2`` 	 |
+| ``prevhome`` 	  | character, nominal  | no change 	      | ``prevhome_2`` 	 |
+| ``region`` 	  | numeric, continuous | numeric, nominal    | ``region_2`` 	 |
+| ``UnitRating``  | numeric, continuous | numeric, ordinal    | ``UnitRating_2`` |
+| ``NbhdRating``  | numeric, continuous | numeric, ordinal    | ``NbhdRating_2`` |
+| ``VeryLoINC``   | numeric, continuous | no change 	      | ``VeryLoINC_2``  |
+| ``LoINC`` 	  | numeric, continuous | no change 	      | ``LoINC_2`` 	 |
+| ``MedianLoINC`` | numeric, continuous | no change 	      | ``MedianLoINC``  | 
+| ``bath`` 	  | numeric, continuous | no change 	      | ''bath_2 	 |
+| ``bed`` 	  | numeric, continuous | no change 	      | ''bed_2'' 	 |
+| ``built`` 	  | numeric, continuous | numeric, ordinal    | ``built_2`` 	 |
+| ``condo`` 	  | numeric, continuous | numeric, nominal    | ``condo_2`` 	 |
+| ``floors`` 	  | numeric, continuous | no change 	      | ''floors_2'' 	 |
+| ``garage`` 	  | numeric, continuous | numeric, nominal    | ``garage_2` 	 |
+| ``lot`` 	  | numeric, continuous | no change	      | ''lot_2"" 	 |
+| ``psewer`` 	  | numeric, continuous | numeric, nominal    | ``psewer_2`` 	 |
+| ``rooms`` 	  | numeric, continuous | no change 	      | ``rooms_2``  	 |
+| ``sqft`` 	  | character, nominal  | numeric, continuous | ``sqft_2``  	 |
+| ``value`` 	  | character, nominal  | numeric, continuous | ``value_2``  	 |
+| ``downpct`` 	  | character, nominal  | no change 	      | ``downpct_2`` 	 |
+| ``downpay`` 	  | character, nominal  | no change	      | ``downpay_2`` 	 |
+| ``helc`` 	  | numeric, continuous | numeric, nominal    | ``helc_2``  	 |
+| ``helump`` 	  | numeric, continuous | numeric, nominal    | ``helump_2`` 	 |
+| ``purchdate``   | numeric, continuous | numeric, ordinal    | ``purchdate_2``  |
+| ``HiEducInc``   | numeric, continuous | numeric, nominal    | ``HiEducInc_2``  |
 
 #########################
 #### Column Viewer 2 ####
