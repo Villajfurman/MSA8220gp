@@ -24,6 +24,11 @@ Part 3 -
 
 	- Add part 2 notes here
 
+---## I. Data Overview
+
+### *Variable Definitions*
+
+
 ## I. Data Overview
 
 ### *Variable Definitions*
@@ -80,7 +85,7 @@ Dependent variable
 
 JMP:
 
-	- Cols => Columns Viewer => Select All Columns => Check Show Quartiles => Show Summary
+	Cols => Columns Viewer => Select All Columns => Check Show Quartiles => Show Summary
 
 *Variables of question*
 
@@ -220,6 +225,32 @@ Value Changes:
 | ``NdhdRating_2`` |    0 | Missing Value Code | 
 | ``bath_2`` 	   |    0 | Missing Value Code | 
 | ``bed_2`` 	   |    0 | Missing Value Code | 
+
+---
+
+## I. Data Screening
+
+### *Outliers*
+
+#### *A. Quantile Range Outliers* - inital change for normal distribution
+
+JMP:
+
+	Analyze => Screening => Explore Outliers => Quantile Range Outliers
+
+	Tail Quantile => .1 => .25
+	Q             =>  3 => 24
+
+Notes
+
+	Increasing Q to 24 identified 158 outliers for lot_2 => 158 => 99998
+
+
+
+
+
+
+
 
 ############################################################
 ################   Data Screening   ########################
