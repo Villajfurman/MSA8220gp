@@ -15,6 +15,65 @@
 
 	- Submit one column with "best" predictions for each of the 10k households.
 	- Indicate whether each is or is NOT a "warm lead".
+## Part 2 - 
+
+	- Add part 2 notes here
+	
+## Part 3 - 
+
+	- Add part 2 notes here
+
+#I. Data Overview
+
+## *Variable Definitions* ##
+
+
+*** Demographic data for head of household: ***
+
+	1. age: age in years
+	2. gender: gender (1=male, 2=female)
+	3. married: marital status (1=married with spouse present, 2=married with spouse absent, 3=widowed, 4=divorced, 5=separated, 6=never married)
+	4. nkid: number of children (any age)
+	5. natvty: country of birth (57=US, 72=Puerto Rico, 109=France, 110=Germany,…)
+	6. race: race (letting W=White, B=Black, I=American Indian, A=Asian, and H=Hawaiian: 1=W only, 2=B only, 3=I only, 4=A only, 5=H only, 6=W/B, 7=W/I, 8=W/A, 9=W/H, 10= B/I, 11=B/A, 12=B/H, 13= I/A, 14=A/H, 15=W/B/I, 16=W/B/A, 17=W/I/A, 18=W/A/H, 19=W/I/A, 21= other combination of 4 or 5 races)
+	7. span: spanish origin (1=yes, 2=no)
+	8. cars: number of cars kept for use by household
+	9 .prevhome: whether the occupant ever owned a home before (1=yes, 2=no, D= don’t know, R=not answered)
+
+*** Location data: ***
+
+	10. region: geographic location of household relative to school (1=north, 2=east, 3=south, 4=west)
+	11. UnitRating: rating of unit as a place to live (10= best, 1=worst)
+	12. NbhdRating: rating of neighborhood as place to live (10= best, 1=worst)
+	13. VeryLoINC: limit on what constitutes “very low income” for the surrounding region
+	14. LoINC: limit on what constitutes “low income” for the surrounding region
+	15. MedianINC: median income for the surrounding region
+
+*** Dwelling data: ***
+
+	16. bath: number of bathrooms
+	17. bed: number of bedrooms
+	18. built: year unit was built
+	19. condo: whether unit is condominium or cooperative (1=yes, 2=no)
+	20. floors: # of stories in building
+	21. garage: garage or carport included (1=yes, 2=no)
+	22. lot: square footage of lot
+	23. 2psewer: unit connected to public sewer (1=yes, 2=no)
+	24. rooms: # of rooms in unit
+	25. sqft: square footage of unit
+	26. value: Zillow value of the unit
+
+*** Mortgage data: ***
+
+	27. downpct: down payment percentage (0=none, 1=0-2%, 2=3-5%, 3=6-10%, 4=11-15%, 5=16-20%, 6=21-40%, 7=41-99%, 8=100%, B=not applicable, D= don’t know)
+	28. dwnpay: main source of down payment (1=sale of previous home, 2=savings, 3=sale of other investment, 4=borrowing, 5=gift, 6=land used for financing, 7=other 8=none, B=not applicable, D= don’t know, R=not answered)
+	29. helc: has a home equity line of credit (1=yes, 2=no)
+	30. helump: has a lump sum home equity loan (1=yes, 2=no)
+	31. purchdate: year unit bought/obtained/received
+
+*** Dependent variable ***
+ 
+	32. HiEducInc: household with college educated parent(s), income over $100K, and at least one child under 18 years old (0=no, 1=yes)
 
 
 ## Part 1 - Submit one column with "best" predictions for each of the 10k households
