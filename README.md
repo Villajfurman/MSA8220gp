@@ -76,14 +76,11 @@ Dependent variable
  
 	32. HiEducInc: household with college educated parent(s), income over $100K, and at least one child under 18 years old (0=no, 1=yes)
 
-#######################
-#### Column Viewer ####
-#######################
+#### *Column Viewer*
 
+*Variables of question*
 
-*** Variables of question ***
-
-| **column** | **N** | **N Missing** | **N Categories** | **Suspect** |
+| *column* | **N** | **N Missing** | **N Categories** | **Suspect** |
 |-|-|-|-|-|
 | ``age``         |  9,723 | 277 |    84 | Cat => Cont.(Check Values)   |
 | ``gender``      | 10,000 |   0 |    NA | Cont. => Cat     	        |
