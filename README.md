@@ -1,62 +1,338 @@
-# Final Project
+###################################################
+## Final Project
+###################################################
 
-This is the repository for the final project in MSA8220. The document below will call out the steps involved in the process for the model.
+# school likes to promote to housholds typically with familie's income >100K & children <18yr.
+# education level, income & children's ages are not explicity available
+# maximize the monetary revenue from correct predictions minus the cost of prediction errors. (profit matrix etc...)
+# 2% of warm lead households marketed will enroll.
+# new student has avg. lifetime value of 75K
+# Average rev for each warm lead is 1500(75K * 2%)
+# Willing to spend $500 marketing per warm lead for lunch etc...
+# Hence 1500 - 500 = 1000 profit for a true positive.
+# Hence 500 cost/lost for a false positive.
+# Anyone outside of warm lead (true negative) & (false negative) are not included since no marketing and no enroll.
 
-## Step 1 - Column Format Changes
+# Part 1 - Submit one column with "best" predictions for each of the 10k households
+# Indicate whether each is or is NOT a "warm lead".
 
-### *round 1 data set*
+##################
+# Data Overview
+##################
 
-| **column** | **original format** | **new format** |
+##############################
+#### Variable Definitions ####
+##############################
+
+*** Demographic data for head of household: ***
+
+!. age: age in years
+2. gender: gender (1=male, 2=female)
+3. married: marital status (1=married with spouse present, 2=married with spouse absent, 3=widowed, 4=divorced, 5=separated, 6=never married)
+4. nkid: number of children (any age)
+5. natvty: country of birth (57=US, 72=Puerto Rico, 109=France, 110=Germany,…)
+6. race: race (letting W=White, B=Black, I=American Indian, A=Asian, and H=Hawaiian: 1=W only, 2=B only, 3=I only, 4=A only, 5=H only, 6=W/B, 7=W/I, 8=W/A, 9=W/H, 10= B/I, 11=B/A, 12=B/H, 13= I/A, 14=A/H, 15=W/B/I, 16=W/B/A, 17=W/I/A, 18=W/A/H, 19=W/I/A, 21= other combination of 4 or 5 races)
+7. span: spanish origin (1=yes, 2=no)
+8. cars: number of cars kept for use by household
+9 .prevhome: whether the occupant ever owned a home before (1=yes, 2=no, D= don’t know, R=not answered)
+
+*** Location data: ***
+
+10. region: geographic location of household relative to school (1=north, 2=east, 3=south, 4=west)
+11. UnitRating: rating of unit as a place to live (10= best, 1=worst)
+12. NbhdRating: rating of neighborhood as place to live (10= best, 1=worst)
+13. VeryLoINC: limit on what constitutes “very low income” for the surrounding region
+14. LoINC: limit on what constitutes “low income” for the surrounding region
+15. MedianINC: median income for the surrounding region
+
+*** Dwelling data: ***
+
+16. bath: number of bathrooms
+17. bed: number of bedrooms
+18. built: year unit was built
+19. condo: whether unit is condominium or cooperative (1=yes, 2=no)
+20. floors: # of stories in building
+21. garage: garage or carport included (1=yes, 2=no)
+22. lot: square footage of lot
+23. 2psewer: unit connected to public sewer (1=yes, 2=no)
+24. rooms: # of rooms in unit
+25. sqft: square footage of unit
+26. value: Zillow value of the unit
+
+*** Mortgage data: ***
+
+27. downpct: down payment percentage (0=none, 1=0-2%, 2=3-5%, 3=6-10%, 4=11-15%, 5=16-20%, 6=21-40%, 7=41-99%, 8=100%, B=not applicable, D= don’t know)
+28. dwnpay: main source of down payment (1=sale of previous home, 2=savings, 3=sale of other investment, 4=borrowing, 5=gift, 6=land used for financing, 7=other 8=none, B=not applicable, D= don’t know, R=not answered)
+29. helc: has a home equity line of credit (1=yes, 2=no)
+30. helump: has a lump sum home equity loan (1=yes, 2=no)
+31. purchdate: year unit bought/obtained/received
+
+#### Dependent variable ####
+ 
+32. HiEducInc: household with college educated parent(s), income over $100K, and at least one child under 18 years old (0=no, 1=yes)
+
+#######################
+#### Column Viewer ####
+#######################
+
+
+*** Variables of question ***
+
+| **column** | **N** | **N Missing** | **N Categories** | **Suspect** |
+|-|-|-|-|-|
+| ``age``         |  9,723 | 277 |    84 | Cat => Cont.(Check Values)   |
+| ``gender``      | 10,000 |   0 |    NA | Cont. => Cat     	        |
+| ``married``     | 10,000 |   0 |    NA | Cont. => Cat 		|
+| ``nkid``        | 10,000 |   0 |    NA | Seems legit 			|
+| ``nativity``    |  9,879 | 121 |    62 | Good, Chk Value Format 	|
+| ``race``        | 10,000 |   0 |    NA | Cont. => Cat 		| 
+| ``span``        |  9,857 | 143 |     2 | Good, Chk Value Format 	|
+| ``cars``        | 10,000 |   0 |    NA | Seems legit			|
+| ``prevhome``    | 10,000 |   0 |    NA | Seems legit		 	|
+| ``region``      | 10,000 |   0 |    NA | Cont. => Cat 		|
+| ``UnitRating``  | 10,000 |   0 |    NA | Cont. => Cat 		|
+| ``NbhdRating``  | 10,000 |   0 |    NA | Cont. => Cat (See "0" value) |
+| ``VeryLoINC``   | 10,000 |   0 |    NA | Check Values 		|
+| ``LoINC``       | 10,000 |   0 |    NA | Check Values 		|
+| ``MedianLoINC`` | 10,000 |   0 |    NA | Check Values 		|
+| ``bath``        | 10,000 |   0 |    NA | See "0" value 		|
+| ``bed``         | 10,000 |   0 |    NA | See "0" value 		|
+| ``built``       | 10,000 |   0 |    NA | Cont. => Cat 		|
+| ``condo``       | 10,000 |   0 |    NA | Cont. => Cat 		|
+| ``floors``      | 10,000 |   0 |    NA | Wide range 			|
+| ``garage``      | 10,000 |   0 |    NA | Cont. => Cat 		|
+| ``lot``         | 10,000 |   0 |    NA | Wide range 			|
+| ``psewer``      | 10,000 |   0 |    NA | Cont. => Cat 		|
+| ``rooms``       | 10,000 |   0 |    NA | Wide range 			|
+| ``sqft``        |  9,938 |  62 | 1,202 | Cat => Cont.(Check Values) 	|
+| ``value``       |  9,940 |  60 |   561 | Cat => Cont.(Check Values) 	|
+| ``downpct``     | 10,000 |   0 |    11 | Good, Check Value Format 	|
+| ``downpay``     | 10,000 |   0 |    11 | Good, Check Value Format 	|
+| ``helc``        | 10,000 |   0 |    NA | Cont. => Cat 		|
+| ``helump``      | 10,000 |   0 |    NA | Cont. => Cat 		|
+| ``purchdate``   | 10,000 |   0 |    NA | Cont. => Cat 		|
+| ``HiEducInc``   | 10,000 |   0 |    NA | Cont. => Cat 		|
+
+Notes
+	New Column - Income
+	low  - 0 - 34,000
+	med  - >34,000 - 55,000
+	high - >55,000
+
+	Check Values
+	AGE - age_2 => See date year format
+	VeryLoINC - VeryLoINC_2 => max 70K? 24K - 34K range (9200)
+	LoINC - LoINC_2 => max 114K? 39K - 53K range (13600)
+	MedianINC - MedianINC_2 => low 38K? 60K - 74K range (13700)
+	SQFT - sqft_2 => low 99? => except for low seems legit
+	VALUE - value_2 => low 1? => except for low seems legit
+
+	Other Info
+	NbhdRating => Seeing "0" when scale is 1-10
+	bed => Seeing "0" possibly missing
+	bath => Seeing "0" possibly missing
+
+*** New Columns ***
+
+| **column** | **original format** | **new format** | **column** |
+|-|-|-|-|
+| ``age`` | character, nominal | numeric, continuous | ``age_2`` |
+| ``gender`` | numeric, continuous | numeric, nominal | ``gender_2`` |
+| ``married`` | numeric, continuous | numeric, nominal | ``married_2`` |
+| ``nkid`` | numeric, continuous | no change | ``nkid_2`` |
+| ``nativity`` | character, nominal | numeric, nominal | ``natvty_2`` |
+| ``race`` | numeric, continuous | numeric, nominal | ``race_2`` |
+| ``span`` | character, nominal | numeric, nominal | ``span_2`` |
+| ``cars`` | numeric, continuous | no change | ``cars_2`` |
+| ``prevhome`` | character, nominal | no change | ``prevhome_2`` |
+| ``region`` | numeric, continuous | numeric, nominal | ``region_2`` |
+| ``UnitRating`` | numeric, continuous | numeric, ordinal | ``UnitRating_2`` |
+| ``NbhdRating`` | numeric, continuous | numeric, ordinal | ``NbhdRating_2`` |
+| ``VeryLoINC`` | numeric, continuous | no change | ``VeryLoINC_2`` |
+| ``LoINC`` | numeric, continuous | no change | ``LoINC_2`` |
+| ``MedianLoINC`` | numeric, continuous | no change | ``MedianLoINC`` | 
+| ``bath`` | numeric, continuous | no change | ''bath_2 |
+| ``bed`` | numeric, continuous | no change | ''bed_2'' |
+| ``built`` | numeric, continuous | numeric, ordinal | ``built_2`` |
+| ``condo`` | numeric, continuous | numeric, nominal | ``condo_2`` |
+| ``floors`` | numeric, continuous | no change | ''floors_2'' |
+| ``garage`` | numeric, continuous | numeric, nominal | ``garage_2` |
+| ``lot`` | numeric, continuous | no change | ''lot_2"" |
+| ``psewer`` | numeric, continuous | numeric, nominal | ``psewer_2`` |
+| ``rooms`` | numeric, continuous | no change | ``rooms_2`` |
+| ``sqft`` | character, nominal | numeric, continuous | ``sqft_2`` |
+| ``value`` | character, nominal | numeric, continuous | ``value_2`` |
+| ``downpct`` | character, nominal | no change | ``downpct_2`` |
+| ``downpay`` | character, nominal | no change | ``downpay_2`` |
+| ``helc`` | numeric, continuous | numeric, nominal | ``helc_2`` |
+| ``helump`` | numeric, continuous | numeric, nominal | ``helump_2`` |
+| ``purchdate`` | numeric, continuous | numeric, ordinal | ``purchdate_2`` |
+| ``HiEducInc`` | numeric, continuous | numeric, nominal | ``HiEducInc_2`` |
+
+#########################
+#### Column Viewer 2 ####
+#########################
+
+Cols => Columns Viewer => Select All Columns, Check Show Quartiles, Show Summary
+
+- age_2 - date caculation for new age value
+
+| **new column** | **original value** | **new value** |
 |-|-|-|
-| ``age`` | character, nominal | numeric, continuous |
-| ``gender`` | numeric, continuous | numeric, nominal |
-| ``married`` | numeric, continuous | numeric, nominal |
-| ``nkid`` | numeric, continuous | no change |
-| ``nativity`` | character, nominal | numeric, nominal |
-| ``race`` | numeric, continuous | numeric, nominal |
-| ``span`` | character, nominal | numeric, nominal |
-| ``cars`` | numeric, continuous | no change |
-| ``prevhome`` | character, nominal | no change |
-| ``region`` | numeric, continuous | numeric, nominal |
-| ``UnitRating`` | numeric, continuous | numeric, ordinal |
-| ``NbhdRating`` | numeric, continuous | numeric, ordinal |
-| ``VeryLoINC`` | numeric, continuous | no change |
-| ``LoINC`` | numeric, continuous | no change |
-| ``MedianLoINC`` | numeric, continuous | no change |
-| ``bath`` | numeric, continuous | no change |
-| ``bed`` | numeric, continuous | no change |
-| ``built`` | numeric, continuous | numeric, ordinal |
-| ``condo`` | numeric, continuous | numeric, nominal |
-| ``floors`` | numeric, continuous | no change |
-| ``garage`` | numeric, continuous | numeric, nominal |
-| ``lot`` | numeric, continuous | no change |
-| ``psewer`` | numeric, continuous | numeric, nominal |
-| ``rooms`` | numeric, continuous | numeric, continuous |
-| ``sqft`` | character, nominal | numeric, continuous |
-| ``value`` | character, nominal | numeric, continuous |
-| ``downpct`` | character, nominal | no change |
-| ``downpay`` | character, nominal | no change |
-| ``helc`` | numeric, continuous | numeric, nominal |
-| ``helump`` | numeric, continuous | numeric, nominal |
-| ``purchdate`` | numeric, continuous | numeric, ordinal |
-| ``HiEducInc`` | numeric, continuous | numeric, nominal |
+| ``age_2`` | 1980 | 39 |
+| ``age_2`` | 1977 | 42 |
+| ``age_2`` | 1972 | 47 |
+| ``age_2`` | 1966 | 53 |
+| ``age_2`` | 1965 | 54 |
+| ``age_2`` | 1948 | 71 |
+| ``age_2`` | 1944 | 75 |
+| ``age_2`` | 1941 | 78 |
+| ``age_2`` | 1935 | 84 |
 
-## Step 2 - Column Overview
+- NdhdRating_2 - Scale is 1-10, see 0s and additional variables suggest missing values
 
-**Categorical Variable** - 19
+| **new column** | **original value** | **new value** |
+|-|-|-|
+| ``NdhdRating_2`` | 0 | Missing Value Code | 
 
-**Continuous Variables** - 12
+- bath_2 - Where do they use bathroom without one and additional variables suggest missing values
 
-**Missing Values** - 6
+| **new column** | **original value** | **new value** |
+|-|-|-|
+| ``bath_2`` | 0 | Missing Value Code 
 
-**Issues**
-  *Age* - date values
-  *bath* - zero values
-  *bed* - zero values
-  *floors* - high values - ex. "21"
-  *lot* - high values - "999998"
-  *sqft* - low values - "99"
-  
+- bed_2 - Where do they sleep without a bed and additional variables suggest missing values
+
+| **new column** | **original value** | **new value** |
+|-|-|-|
+| ``bed_2`` | 0 | Missing Value Code | 
+
+	VeryLoINC - VeryLoINC_2 => max 70K? 24K - 34K range (9200)
+	LoINC - LoINC_2 => max 114K? 39K - 53K range (13600)
+	MedianINC - MedianINC_2 => low 38K? 60K - 74K range (13700)
+	SQFT - sqft_2 => low 99? => except for low seems legit
+	VALUE - value_2 => low 1? => except for low seems legit
+
+############################################################
+################   Data Screening   ########################
+############################################################
+
+
+################
+### Outliers ###
+################
+
+Analyze -> Screening -> Explore Outliers -> Quantile Range Outliers
+
+###########################
+#a. Quantile Range Outliers - inital change for normal distribution analysis
+###########################
+
+Tail Quantile - Change to .25
+Q - Change to 1.5
+		
+Reviewed Data and increase Q up to 24 when I noticed lot_2 has 158 outliers of 999998
+
+###########################
+#b. Change Outliers Missing
+###########################	
+
+- lot_2 - After increasing Q length to 24 99998(158) cases appeared and change to missing
+
+| **new column** | **original value** | **new value** |
+|-|-|-|
+| ``lot_2`` | 999998 | Missing Value Code | 
+
+####################
+### Missing Data ###
+####################
+
+First review the new data in column viewer to determine the missing conintuous variables
+
+*** Continuous Variables of question ***
+
+| **new_column** | **N** | **N Missing** |
+|-|-|-|
+| ``age_2``   |  9,723 | 277 |
+| ``bath_2``  |  9,986 |  14 |
+| ``bed_2``   |  9,992 |   8 |
+| ``lot_2``   |  9,842 | 158 |
+| ``sqft_2``  |  9,938 |  62 |
+| ``value_2`` |  9,940 |  60 |
+
+# Create new rows for imputation calculation #
+# Only looking at specifc columns such as missing continuous data for imput
+
+Analyze -> Screening -> Explore Missing Values -> Multivariate Normal Imputation
+
+	accept skrinkage
+
+| **new_column** |
+|-|
+| ``age_imputed``   |
+| ``bath_imputed``  |
+| ``bed_imputed``   |
+| ``lot_imputed``   |
+| ``sqft_imputed``  |
+| ``value_imputed`` |
+
+Tables -> Missing Data Pattern
+
+# select all columns that were missing data from original set
+
+| **column** | **N** | **N Missing** |
+|-|-|-|
+| ``age_2``        |  9,723 | 277 |
+| ``lot_2``        |  9,842 | 158 |
+| ``span_2``       |  9,857 | 143 |
+| ``natvty_2``     |  9,879 | 121 |
+| ``sqft_2``       |  9,938 |  62 |
+| ``value_2``      |  9,940 |  60 |
+| ``bath_2``	   |  9,986 |  14 |
+| ``bed_2``        |  9,992 |   8 |
+| ``NbhdRating_2`` |  9,998 |   2 |
+
+# Pattern review suggests that some of the data isn't missing at random
+
+| **column** | **N** | **N Missing** |
+|-|-|-|
+| ``age_2``        |  9,723 | 277 |
+| ``lot_2``        |  9,842 | 158 |
+| ``span_2``       |  9,857 | 143 |
+| ``natvty_2``     |  9,879 | 121 |
+| ``sqft_2``       |  9,938 |  62 |
+| ``value_2``      |  9,940 |  60 |
+| ``bath_2``	   |  9,986 |  14 |
+| ``bed_2``        |  9,992 |   8 |
+| ``NbhdRating_2`` |  9,998 |   2 |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Missing Values
 
 Right now, we’re in your first GitHub **repository**. A repository is like a folder or storage space for your project. Your project's repository contains all its files such as code, documentation, images, and more. It also tracks every change that you—or your collaborators—make to each file, so you can always go back to previous versions of your project if you make any mistakes.
