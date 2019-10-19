@@ -182,11 +182,10 @@ Other Info:
 
 JMP:
 
-	- Cols => Columns Viewer => Select All Columns => Check Show Quartiles => Show Summary
+	Cols => Columns Viewer => Select All Columns => Check Show Quartiles => Show Summary
 
 Notes:
 
-	- Seeing age_2, NdhdRating_2, bath_2, bed_2 that need addressing right away.
 	- VeryLoINC - VeryLoINC_2 => max 70K? 24K - 34K range (9200)
 	- LoINC - LoINC_2 	  => max 114K? 39K - 53K range (13600)
 	- MedianINC - MedianINC_2 => low 38K? 60K - 74K range (13700)
@@ -221,13 +220,6 @@ Value Changes:
 | ``NdhdRating_2`` |    0 | Missing Value Code | 
 | ``bath_2`` 	   |    0 | Missing Value Code | 
 | ``bed_2`` 	   |    0 | Missing Value Code | 
-
-
-	VeryLoINC - VeryLoINC_2 => max 70K? 24K - 34K range (9200)
-	LoINC - LoINC_2 => max 114K? 39K - 53K range (13600)
-	MedianINC - MedianINC_2 => low 38K? 60K - 74K range (13700)
-	SQFT - sqft_2 => low 99? => except for low seems legit
-	VALUE - value_2 => low 1? => except for low seems legit
 
 ############################################################
 ################   Data Screening   ########################
