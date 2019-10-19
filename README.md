@@ -1,17 +1,16 @@
-###################################################
-## Final Project
-###################################################
+# Final Project
 
-# school likes to promote to housholds typically with familie's income >100K & children <18yr.
-# education level, income & children's ages are not explicity available
-# maximize the monetary revenue from correct predictions minus the cost of prediction errors. (profit matrix etc...)
-# 2% of warm lead households marketed will enroll.
-# new student has avg. lifetime value of 75K
-# Average rev for each warm lead is 1500(75K * 2%)
-# Willing to spend $500 marketing per warm lead for lunch etc...
-# Hence 1500 - 500 = 1000 profit for a true positive.
-# Hence 500 cost/lost for a false positive.
-# Anyone outside of warm lead (true negative) & (false negative) are not included since no marketing and no enroll.
+	School likes to promote to housholds typically with familie's income >100K & children <18yr.
+	Education level, income & children's ages are not explicity available
+	Maximize the monetary revenue from correct predictions minus the cost of prediction errors. (profit matrix etc...)
+	2% of warm lead households marketed will enroll.
+	New student has avg. lifetime value of 75K
+	Average rev for each warm lead is 1500(75K * 2%)
+	Willing to spend $500 marketing per warm lead for lunch etc...
+	Hence 1500 - 500 = 1000 profit for a true positive.
+	Hence 500 cost/lost for a false positive.
+	Anyone outside of warm lead (true negative) & (false negative) are not included since no marketing and no enroll.
+
 
 # Part 1 - Submit one column with "best" predictions for each of the 10k households
 # Indicate whether each is or is NOT a "warm lead".
