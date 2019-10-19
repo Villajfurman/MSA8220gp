@@ -184,37 +184,44 @@ JMP:
 
 	- Cols => Columns Viewer => Select All Columns => Check Show Quartiles => Show Summary
 
-- age_2 - date caculation for new age value
+Notes:
 
-| **new column** | **original value** | **new value** |
+	- Seeing age_2, NdhdRating_2, bath_2, bed_2 that need addressing right away.
+	- VeryLoINC - VeryLoINC_2 => max 70K? 24K - 34K range (9200)
+	- LoINC - LoINC_2 	  => max 114K? 39K - 53K range (13600)
+	- MedianINC - MedianINC_2 => low 38K? 60K - 74K range (13700)
+	- SQFT - sqft_2 	  => low 99? => except for low seems legit
+	- VALUE - value_2 	  => low 1? => except for low seems legit
+
+Check Values
+
+	- age_2	     => receiving dates instead of continuous values.
+	- NdhdRating => Scale is 1-10, see 0s and additional variables suggest missing values0 value is considered a missing value
+	- bath_2     => Where do they use bathroom without one and additional variables suggest missing values.
+	- bed_2	     => Where do they sleep without a bed and additional variables suggest missing values.
+
+Value Changes:
+
+	- age_2		=> date calculation for new age value
+	- NdhdRating_2  => 0 value is considered a missing value
+	- bath_2        => 0 value is considered a missing value
+	- bed_2	        => 0 value is considered a missing value
+
+| **column** | **original value** | **new value** |
 |-|-|-|
-| ``age_2`` | 1980 | 39 |
-| ``age_2`` | 1977 | 42 |
-| ``age_2`` | 1972 | 47 |
-| ``age_2`` | 1966 | 53 |
-| ``age_2`` | 1965 | 54 |
-| ``age_2`` | 1948 | 71 |
-| ``age_2`` | 1944 | 75 |
-| ``age_2`` | 1941 | 78 |
-| ``age_2`` | 1935 | 84 |
+| ``age_2`` 	   | 1980 | 		    39 |
+| ``age_2`` 	   | 1977 | 		    42 |
+| ``age_2`` 	   | 1972 | 		    47 |
+| ``age_2`` 	   | 1966 | 	 	    53 |
+| ``age_2`` 	   | 1965 | 		    54 |
+| ``age_2`` 	   | 1948 | 		    71 |
+| ``age_2`` 	   | 1944 |  		    75 |
+| ``age_2`` 	   | 1941 | 		    78 |
+| ``age_2`` 	   | 1935 | 		    84 |
+| ``NdhdRating_2`` |    0 | Missing Value Code | 
+| ``bath_2`` 	   |    0 | Missing Value Code | 
+| ``bed_2`` 	   |    0 | Missing Value Code | 
 
-- NdhdRating_2 - Scale is 1-10, see 0s and additional variables suggest missing values
-
-| **new column** | **original value** | **new value** |
-|-|-|-|
-| ``NdhdRating_2`` | 0 | Missing Value Code | 
-
-- bath_2 - Where do they use bathroom without one and additional variables suggest missing values
-
-| **new column** | **original value** | **new value** |
-|-|-|-|
-| ``bath_2`` | 0 | Missing Value Code 
-
-- bed_2 - Where do they sleep without a bed and additional variables suggest missing values
-
-| **new column** | **original value** | **new value** |
-|-|-|-|
-| ``bed_2`` | 0 | Missing Value Code | 
 
 	VeryLoINC - VeryLoINC_2 => max 70K? 24K - 34K range (9200)
 	LoINC - LoINC_2 => max 114K? 39K - 53K range (13600)
