@@ -507,6 +507,101 @@ Conclusion:
 ## III. Data Exploration
 
 
+#### *A. Analyze* - Distribution, Fit Y by X, Tabulate, Multivariate
+
+Notes:
+
+	- Hide all the columns that are not going to used in the model so far
+	- They still appear in the column selector for analysis
+
+*Current Final Data Set*
+
+| **column** |
+|-|
+| ``Age_Completed`` |
+| ``gender_2``      |
+| ``married_2``     |
+| ``nkid_2``        |
+| ``natvty_2``      |
+| ``race_2``   	    |
+| ``span_2``        |
+| ``cars_2``        |
+| ``prevhome_2``    |
+| ``region_2``      |
+| ``UnitRating_2``  |
+| ``NbhdRating_2``  |
+| ``VeryLoINC_2``   |
+| ``LoINC_2``       |
+| ``MedianINC_2``   |
+| ``bath_imputed``  |
+| ``bed_imputed``   |
+| ``built_2``       |
+| ``condo_2``       |
+| ``floors_2``      |
+| ``garage_2``      |
+| ``lot_2``	    |
+| ``psewer_2``      |
+| ``rooms_2``       |
+| ``sqft_imputed``  |
+| ``value_imputed`` |
+| ``downpct_2``     |
+| ``dwnpay_2``      |
+| ``helc_2``        |
+| ``helump_2``      |
+| ``purchdate_2``   |
+| ``HiEduInc_2``    |
+
+
+*1. Distribution*
+
+JMP
+
+	Analyze => Distribution
+
+Notes:
+
+	- Select all the columns for model.
+	- 
+
+
+*2. Fit Y by X*
+
+JMP
+
+	Analyze => Distribution
+
+Notes:
+
+	- Hide all the columns that are not going to be used in the model so far
+	- Select all the columns for model.
+
+
+
+
+*3. Tabulate*
+
+JMP
+
+	Analyze => Distribution
+
+Notes:
+
+	- Hide all the columns that are not going to be used in the model so far
+	- Select all the columns for model.
+
+*4. Multivariate*
+
+JMP
+
+	Analyze => Distribution
+
+Notes:
+
+	- Hide all the columns that are not going to be used in the model so far
+	- Select all the columns for model.
+
+
+
 
 
 
