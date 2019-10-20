@@ -228,7 +228,7 @@ Value Changes:
 
 ---
 
-## I. Data Screening
+## II. Data Screening
 
 ### *Outliers*
 
@@ -353,7 +353,7 @@ Notes:
 
 JMP:
 
-	Analyze -> Multivariate Methods -> Multivariate (all missing cont. vars )
+	Analyze -> Multivariate Methods -> Multivariate (all missing cont. vars)
 
 Notes:
 
@@ -381,13 +381,130 @@ Notes:
 | ``rooms_2``     |  ``sqft_2``      | .2552 |
 | ``rooms_2``     |  ``value_2``     | .3431 |
 	
-Column Changes
+Column Changes:
 
 	- age_2, lot_2 do not show any correlation and excluded from imputation.
 	- remove age_imputed and lot_imputed from data set. 
 
 #### *Missing Interpretation*
 
+Modeling Missing Values:
+
+	- starting with age_2 and then lot_2 values.
+
+JMP:
+
+	Right Click => Column Header => New Formula Column => Distributional => Informative Missing
+
+Notes:
+
+	- See right away that IsMissing(column_2) is one column with binary values "Is Missing"
+	- The other is informative{column_2}
+
+
+Column Changes:
+
+	- new column - *IsMissing[age_2]*
+	- new column - *IsMissing[lot_2]*
+
+*Create a Validation Column*
+
+Review:
+
+	- Missing Validation Column in data set so need to create a new one
+
+JMP
+
+	Right of last column => Right Click empty column => New Column
+
+New Column Info:
+
+	Column Name - Validation
+	Modeling Type - Nominal
+	Initalize Data - Random
+	Random Indicator - Values => 0,1,2 => Proportions => .4, .3, .3
+
+*Predict Age & Lot Missing Values*
+
+Notes:
+
+	- Build model for each new column with variables
+	- Use Bootstrap to build model
+	- Repeat process for *Age_Completed* & *Lot_Completed*
+	- Use imputed columns instead of original_2 columns for this process.
+
+JMP
+
+	Analyze => Predictive => Bootstrap Forest => Use indepenent variables to predict each column
+	Supress Multithreading => Set random seed to 123 => ok
+	Red Triangle => Save Columns => Saved Predicitives
+
+New Column Info:
+
+	Column Name - age_2 Predicted
+	Column Name - lot_2 Predicted
+
+*Create Completed Columns*
+
+Notes:
+
+	- Insert new column for each new set (Age_Completed & Lot_Completed)
+
+JMP
+
+	Right click on new column => Formula => Conditional - if => Comparison - Is Missing  "age_2 to age_predicted, otherwise age_2"
+	Repeat steps for lot_completed
+
+New Column Info
+
+	Column Name - Age_Completed
+	Column Name - Lot_Completed
+
+*Compare Complete to Is Missing Columns*
+
+JMP
+
+	Y by X => Y=Is Misssing X=Complete Column
+
+Notes:
+
+	Repeat for each "Completed Column"
+	Check p-values
+
+Results
+
+	Age_Completed - missing at random
+	Lot_Completed - Higher the lot size more likely its missing
+
+*Response Screening Investigation*
+
+JMP
+
+	Analyze => Screening => Response Screening => Choose Values => ok
+
+Notes:
+
+	- Drop both Is Missing in Y
+	- Throw in independent variables in X
+	- Lot_2 is not missing at random and the values in the chart below suggest just that.
+	- There were quite a few more but just hit on pain points.
+
+| **column** | **FDR_Value** |
+|-|-|-|
+| ``psewer_2``      | 67.99 |
+| ``Lot_Completed`` | 11.60 |
+| ``MedianINC_2``   |  8.01 |
+	
+*Results*
+
+Conclusion:
+
+	Use informative missing for Lot_2.
+	We could use Age_Completed as missing completely as random.
+
+---
+
+## III. Data Exploration
 
 
 
