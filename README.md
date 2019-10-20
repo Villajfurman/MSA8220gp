@@ -490,7 +490,7 @@ Notes:
 	- There were quite a few more but just hit on pain points.
 
 | **column** | **FDR_Value** |
-|-|-|-|
+|-|-|
 | ``psewer_2``      | 67.99 |
 | ``Lot_Completed`` | 11.60 |
 | ``MedianINC_2``   |  8.01 |
