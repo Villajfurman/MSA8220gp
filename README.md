@@ -245,7 +245,164 @@ Notes
 
 	Increasing Q to 24 identified 158 outliers for lot_2 => 158 => 99998
 
+| **column** | **original value** | **new value** |
+|-|-|-|
+| ``lot_2`` | 999998 | Missing Value Code | 
 
+#### *B. Change Outliers Missing* - After increasing Q length to 24 99998(158) cases appeared and change to missing
+
+JMP:
+
+	Analyze => Screening => Explore Outliers => Quantile Range Outliers => Change to Missing
+	
+### *Missing Data*
+
+#### *Column Viewer 3*
+
+JMP:
+
+	Cols => Columns Viewer => Select All Columns => Check Show Quartiles => Show Summary
+
+Notes:
+
+	- Identify all the **CONTINUOUS** variables with missing data except add age_2.
+	- List out below (Create a new column for these as the imputation will replace values)
+
+| **column** | **N** | **N Missing** |
+|-|-|-|
+| ``age_2``   |  9,723 | 277 |
+| ``bath_2``  |  9,986 |  14 |
+| ``bed_2``   |  9,992 |   8 |
+| ``lot_2``   |  9,842 | 158 |
+| ``sqft_2``  |  9,938 |  62 |
+| ``value_2`` |  9,940 |  60 |
+
+Add New Column Info:
+
+	- Create new rows for imputation calculation.
+	- List on new columns below.
+
+| **imputed_column** |
+|-|
+| ``age_imputed``   |
+| ``bath_imputed``  |
+| ``bed_imputed``   |
+| ``lot_imputed``   |
+| ``sqft_imputed``  |
+| ``value_imputed`` |
+
+JMP:
+
+	Analyze => Screening => Explore Missing Values => Select "New Columns" => Multivariate Normal Imputation => Accept Skrinkage => Yes
+
+Note:
+
+	- Probably should be done first prior to imputation but seeing there was new column created for these they can be removed if needed.
+
+#### *Column Viewer 4*
+
+JMP:
+
+	Cols => Columns Viewer => Select All Columns => Check Show Quartiles => Show Summary
+
+Notes:
+
+	- Identify all the variables with missing data not just continuous.
+	- List out below (Remember to create a new column for these as the imputation will replace values)
+
+
+*Missing Data Variables_2*
+| **column** | **N** | **N Missing** |
+|-|-|-|
+| ``age_2``        |  9,723 | 277 |
+| ``lot_2``        |  9,842 | 158 |
+| ``span_2``       |  9,857 | 143 |
+| ``natvty_2``     |  9,879 | 121 |
+| ``sqft_2``       |  9,938 |  62 |
+| ``value_2``      |  9,940 |  60 |
+| ``bath_2``	   |  9,986 |  14 |
+| ``bed_2``        |  9,992 |   8 |
+| ``NbhdRating_2`` |  9,998 |   2 |
+
+#### *Identify Missing Data Patterns*
+
+JMP:	
+
+	Tables => Missing Data Pattern => Select "Select Columns"
+
+Notes:
+
+	- Pattern review suggests that some of the data isn't missing at random.
+	- It is possible span_2 nativity_2 have a pattern suggesting not random.
+	- It is possible that sqft_2 & value_2 have a pattern suggesting not random
+	- Will review the correlation table for further info.
+
+| **column** | **N** | **N Missing** |
+|-|-|-|
+| ``age_2``        |  9,723 | 277 |
+| ``lot_2``        |  9,842 | 158 |
+| ``span_2``       |  9,857 | 143 |
+| ``natvty_2``     |  9,879 | 121 |
+| ``sqft_2``       |  9,938 |  62 |
+| ``value_2``      |  9,940 |  60 |
+| ``bath_2``	   |  9,986 |  14 |
+| ``bed_2``        |  9,992 |   8 |
+| ``NbhdRating_2`` |  9,998 |   2 |
+
+#### *Multicollinearity*
+
+JMP:
+
+	Analyze -> Multivariate Methods -> Multivariate (all missing cont. vars )
+
+Notes:
+
+	- Identify correlations between columns to determine imputation.
+	- sqft_2 correlates with rooms_2 moderately
+	- value_2 correlates with VeryLoINC_2, MedianINC_2, bath_2, rooms_2
+	- bath_2 correlates with bed_2, rooms_2, value_2
+	- bed_2 correlates with VeryLoINC_2, bath_2, rooms_2, value_2
+	
+| **column1** | **column2** | **Correlation_Value** |
+|-|-|-|
+| ``car_2``       |  ``VeryLoINC_2`` | .3092 |
+| ``car_2``       |  ``LoINC_2``     | .3215 |
+| ``VeryLoINC_2`` |  ``LoINC_2``     | .9786 |
+| ``VeryLoINC_2`` |  ``MedianINC_2`` | .7215 |
+| ``VeryLoINC_2`` |  ``bed_2``       | .2591 |
+| ``VeryLoINC_2`` |  ``value_2``     | .3320 |
+| ``LoINC_2``     |  ``MedianINC_2`` | .3144 |
+| ``MedianINC_2`` |  ``value_2``     | .3084 |
+| ``bath_2``      |  ``bed_2``       | .4920 |
+| ``bath_2``      |  ``rooms_2``     | .5442 |
+| ``bath_2``      |  ``value_2'`     | .3858 |
+| ``bed_2``       |  ``rooms_2``     | .7633 |
+| ``bed_2``	  |  ``value_2``     | .2702 |
+| ``rooms_2``     |  ``sqft_2``      | .2552 |
+| ``rooms_2``     |  ``value_2``     | .3431 |
+	
+Column Changes
+
+	- age_2, lot_2 do not show any correlation and excluded from imputation.
+	- remove age_imputed and lot_imputed from data set. 
+
+#### *Missing Interpretation*
+
+
+
+
+
+
+
+
+
+## III. Data Exploration
+
+## IV. Predictive Modeling
+
+## V. Model Selection
+
+## VI. Making Predictions
 
 
 
