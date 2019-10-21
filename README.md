@@ -561,28 +561,36 @@ JMP
 Notes:
 
 	- Select all the columns for model.
-	- 
 
+Column Info:
+
+	- Looking at our prediction variable "HiEducINC_2"
+	- HiEducInc: household with college educated parent(s), income over $100K, and at least one child under 18 years old (0=no, 1=yes)
+	- Value 0 => Count = 8859, Prob = .88950
+	- Value 0 => Count = 1141, Prob = .11410
 
 *2. Fit Y by X*
 
 JMP
 
-	Analyze => Distribution
-
+	Analyze => Fit X by Y
+	
 Notes:
 
-	- Hide all the columns that are not going to be used in the model so far
 	- Select all the columns for model.
+	- This time use HiEduINC as the response variable
 
-
-
+Column Info:
+	
+	- Review all the best fit
+	- Review all the interesting relationships
+  
 
 *3. Tabulate*
 
 JMP
 
-	Analyze => Distribution
+	Analyze => Tabulate
 
 Notes:
 
@@ -591,239 +599,234 @@ Notes:
 
 *4. Multivariate*
 
-JMP
-
-	Analyze => Distribution
-
 Notes:
 
-	- Hide all the columns that are not going to be used in the model so far
-	- Select all the columns for model.
+	- Previously done
 
+#### *B. Graph* - Graph Builder, Scatterplot, Scatterplot 3D
 
+*1. Graph Builder*
 
+JMP
 
+	- Graph => Graph Builder => Drag columns of interest into appropriate columns.
+	- Choose the options for visuals to look at relationships.
 
+*1. Scatterplot*
 
+JMP
 
+	- Graph => Scatterplot Matrix => Drag columns of interest into appropriate columns.
+	- Chose the options for visuals to look at relationships.
 
+*1. Scatterplot*
 
-## III. Data Exploration
+JMP
+
+	- Graph => Scatterplot Matrix => Drag columns of interest into appropriate columns.
+	- Looking at relationships between sqft_2, value_2, bath_2, bed_2 * few others.
+
+---
 
 ## IV. Predictive Modeling
 
+Seed - 123
+
+### *Partitioning*
+
+JMP
+
+	Analyze => predictive modeling => partition => select columns => Go
+
+
+Columns:
+
+	HiEduInc_2 as repsonse
+	Below as the X Factors
+	Validation as Validation
+	Informative Missing
+	Ordinal Restricts Order
+
+* X Factors*
+| **column** |
+|-|
+| ``Age_Completed`` |
+| ``gender_2``      |
+| ``married_2``     |
+| ``nkid_2``        |
+| ``natvty_2``      |
+| ``race_2``   	    |
+| ``span_2``        |
+| ``cars_2``        |
+| ``prevhome_2``    |
+| ``region_2``      |
+| ``UnitRating_2``  |
+| ``NbhdRating_2``  |
+| ``VeryLoINC_2``   |
+| ``LoINC_2``       |
+| ``MedianINC_2``   |
+| ``bath_imputed``  |
+| ``bed_imputed``   |
+| ``built_2``       |
+| ``condo_2``       |
+| ``floors_2``      |
+| ``garage_2``      |
+| ``lot_2``	    |
+| ``psewer_2``      |
+| ``rooms_2``       |
+| ``sqft_imputed``  |
+| ``value_imputed`` |
+| ``downpct_2``     |
+| ``dwnpay_2``      |
+| ``helc_2``        |
+| ``helump_2``      |
+| ``purchdate_2``   |
+
+#### *Confusion Matrix*
+
+JMP
+
+	Red Triangle => Show Fit Details
+
+Notes:
+
+	Get the confusion matrix
+
+JMP
+
+	Red Triangle => Display Options => Show Split Prob
+
+Notes:
+
+	Get the confusion matrix
+	Review the data
+
+*Profit Matrix*
+
+JMP
+
+	Highlight HiEduINC => Right Click => Column Info => Column Properties => Profit Matrix	
+
+| **Enrolled**   | ``0``      | ``1`` |
+| `` 0`` 	 | **TN - 0** | **FP, -500** |
+| `` 1`` 	 | **FN - 0** | **TP, 1000** |
+
+JMP
+
+	Analyze => Predictive Modeling => Partition => Recall
+	Red Triangle => Save Prediction Formula
+
+Notes:
+
+	- Review output
+	- Copy output to table 
+	- Close output table
+	- 8 New columns on table
+	
+
+Prob(HiEduInc_2==0)
+Prob(HiEduInc_2==1)
+Most Likely HiEduInc_2
+Profit for 0
+Profit for 1
+Most Profitable Predition for HiEduInc_2
+Expected Profit for HiEduInc_2
+Actual Profit for HiEduInc_2
+
+Notes:
+
+	Profit for 0
+
+	Profit for 1
+
+### *Decision Tree*
+
+Notes:
+
+	run decision tree (default)
+	record in models down below
+
+### *Bootstrap Forest*
+
+Notes:
+
+	rerun but for boostrap (default)
+
+### *Boosted Tree*
+
+Notes:
+	rerun but boosted (default)
+
+## Models 
+
+| Model ID | Model Type | Parameter | test decision matrix | Profit | MsClass Rate |
+| 1  | decision | default           |2414 275 | 92500 | .0893 |
+| -  | - | -		            |  81 230 |
+
+| Model ID | Model Type | Parameter | test decision matrix | Profit | MsClass Rate |
+| 2  | bootstrap | default          |2516 173 | 132500 | .0824 |
+| -  | - | -		            |  92 219 |
+
+| Model ID | Model Type | Parameter | test decision matrix | Profit | MsClass Rate |
+| 3  | boosted | default            |2489 200 | 129000 | .0767 |
+| -  | - | -			    |  82 229 |
+
+
+## Models Averaging
+
+	Analyze => Predictive Modeling => Model Comparison => red triangle => model averaging
+
+	Columns to select
+	prob(HiEduInc_2== 1)
+	Prob(HiEduInc_2== 1)2
+	Prob(HiEduInc_2== 1)3
+
+	new columns to table
+
+	Partition  | .0893 | 3000 | 32.167 |
+	Bootstrap Forest | .08924 | 2984 | 43.063 |
+	Boosted Tree | .1151 | 3000 | 43 |
+	Model Avg | .1197 | 2984 | 39.042 |
+
+Profit Matrix 
+
+	| 0 | -500 |
+	| 0 | 1000 |
+
 ## V. Model Selection
+
+## Models Averaging
+
+	Analyze => Predictive Modeling => Model Comparison => red triangle => model averaging
+
+	Columns to select
+	prob(HiEduInc_2== 1)
+	Prob(HiEduInc_2== 1)2
+	Prob(HiEduInc_2== 1)3
+	HiEduInc_2 1 Avg Predictor
+	
+	By Validation
+
+Model Comparison Validation=2 Test
+	
+Round 1	Winner - Bootsrap Forest
+
+| Model ID | Model Type | Parameter | test decision matrix | Profit | MsClass Rate |
+| 2  | bootstrap | default          |2516 173 | 132500 | .0824 |
+| -  | - | -		            |  92 219 | - |
+	
+Expected Profit = 173(-500)+219(1000) = 132500
+Expected Profit = 43.063(2984) = 128500
+
+## training model round 2
+
+Round 2 Winner - Boosted
+
+| Model ID | Model Type | Parameter | test decision matrix | Profit | MsClass Rate |
+| 2  | boosted | Num of layers = 1000 |2502 187 | 134500 | .0900 |
+| -  | -       | -		      |  80 231 | - | - |
+
 
 ## VI. Making Predictions
 
 
-
-
-
-
-############################################################
-################   Data Screening   ########################
-############################################################
-
-
-################
-### Outliers ###
-################
-
-Analyze -> Screening -> Explore Outliers -> Quantile Range Outliers
-
-###########################
-#a. Quantile Range Outliers - inital change for normal distribution analysis
-###########################
-
-Tail Quantile - Change to .25
-Q - Change to 1.5
-		
-Reviewed Data and increase Q up to 24 when I noticed lot_2 has 158 outliers of 999998
-
-###########################
-#b. Change Outliers Missing
-###########################	
-
-- lot_2 - After increasing Q length to 24 99998(158) cases appeared and change to missing
-
-| **new column** | **original value** | **new value** |
-|-|-|-|
-| ``lot_2`` | 999998 | Missing Value Code | 
-
-####################
-### Missing Data ###
-####################
-
-First review the new data in column viewer to determine the missing conintuous variables
-
-*** Continuous Variables of question ***
-
-| **new_column** | **N** | **N Missing** |
-|-|-|-|
-| ``age_2``   |  9,723 | 277 |
-| ``bath_2``  |  9,986 |  14 |
-| ``bed_2``   |  9,992 |   8 |
-| ``lot_2``   |  9,842 | 158 |
-| ``sqft_2``  |  9,938 |  62 |
-| ``value_2`` |  9,940 |  60 |
-
-# Create new rows for imputation calculation #
-# Only looking at specifc columns such as missing continuous data for imput
-
-Analyze -> Screening -> Explore Missing Values -> Multivariate Normal Imputation
-
-	accept skrinkage
-
-| **new_column** |
-|-|
-| ``age_imputed``   |
-| ``bath_imputed``  |
-| ``bed_imputed``   |
-| ``lot_imputed``   |
-| ``sqft_imputed``  |
-| ``value_imputed`` |
-
-Tables -> Missing Data Pattern
-
-# select all columns that were missing data from original set
-
-| **column** | **N** | **N Missing** |
-|-|-|-|
-| ``age_2``        |  9,723 | 277 |
-| ``lot_2``        |  9,842 | 158 |
-| ``span_2``       |  9,857 | 143 |
-| ``natvty_2``     |  9,879 | 121 |
-| ``sqft_2``       |  9,938 |  62 |
-| ``value_2``      |  9,940 |  60 |
-| ``bath_2``	   |  9,986 |  14 |
-| ``bed_2``        |  9,992 |   8 |
-| ``NbhdRating_2`` |  9,998 |   2 |
-
-# Pattern review suggests that some of the data isn't missing at random
-
-| **column** | **N** | **N Missing** |
-|-|-|-|
-| ``age_2``        |  9,723 | 277 |
-| ``lot_2``        |  9,842 | 158 |
-| ``span_2``       |  9,857 | 143 |
-| ``natvty_2``     |  9,879 | 121 |
-| ``sqft_2``       |  9,938 |  62 |
-| ``value_2``      |  9,940 |  60 |
-| ``bath_2``	   |  9,986 |  14 |
-| ``bed_2``        |  9,992 |   8 |
-| ``NbhdRating_2`` |  9,998 |   2 |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Missing Values
-
-Right now, we’re in your first GitHub **repository**. A repository is like a folder or storage space for your project. Your project's repository contains all its files such as code, documentation, images, and more. It also tracks every change that you—or your collaborators—make to each file, so you can always go back to previous versions of your project if you make any mistakes.
-
-This repository contains three important files: The HTML code for your first website on GitHub, the CSS stylesheet that decorates your website with colors and fonts, and the **README** file. It also contains an image folder, with one image file.
-
-## Demension Reduction (Multicollinearity)
-
-You are currently viewing your project's **README** file. **_README_** files are like cover pages or elevator pitches for your project. They are written in plain text or [Markdown language](https://guides.github.com/features/mastering-markdown/), and usually include a paragraph describing the project, directions on how to use it, who authored it, and more.
-
-[Learn more about READMEs](https://help.github.com/en/articles/about-readmes)
-
-## Your first website
-
-**GitHub Pages** is a free and easy way to create a website using the code that lives in your GitHub repositories. You can use GitHub Pages to build a portfolio of your work, create a personal website, or share a fun project that you coded with the world. GitHub Pages is automatically enabled in this repository, but when you create new repositories in the future, the steps to launch a GitHub Pages website will be slightly different.
-
-[Learn more about GitHub Pages](https://pages.github.com/)
-
-## Rename this repository to publish your site
-
-We've already set-up a GitHub Pages website for you, based on your personal username. This repository is called `hello-world`, but you'll rename it to: `username.github.io`, to match your website's URL address. If the first part of the repository doesn’t exactly match your username, it won’t work, so make sure to get it right.
-
-Let's get started! To update this repository’s name, click the `Settings` tab on this page. This will take you to your repository’s settings page. 
-
-![repo-settings-image](https://user-images.githubusercontent.com/18093541/63130482-99e6ad80-bf88-11e9-99a1-d3cf1660b47e.png)
-
-Under the **Repository Name** heading, type: `username.github.io`, where username is your username on GitHub. Then click **Rename**—and that’s it. When you’re done, click your repository name or browser’s back button to return to this page.
-
-<img width="1039" alt="rename_screenshot" src="https://user-images.githubusercontent.com/18093541/63129466-956cc580-bf85-11e9-92d8-b028dd483fa5.png">
-
-Once you click **Rename**, your website will automatically be published at: https://your-username.github.io/. The HTML file—called `index.html`—is rendered as the home page and you'll be making changes to this file in the next step.
-
-Congratulations! You just launched your first GitHub Pages website. It's now live to share with the entire world
-
-## Making your first edit
-
-When you make any change to any file in your project, you’re making a **commit**. If you fix a typo, update a filename, or edit your code, you can add it to GitHub as a commit. Your commits represent your project’s entire history—and they’re all saved in your project’s repository.
-
-With each commit, you have the opportunity to write a **commit message**, a short, meaningful comment describing the change you’re making to a file. So you always know exactly what changed, no matter when you return to a commit.
-
-## Practice: Customize your first GitHub website by writing HTML code
-
-Want to edit the site you just published? Let’s practice commits by introducing yourself in your `index.html` file. Don’t worry about getting it right the first time—you can always build on your introduction later.
-
-Let’s start with this template:
-
-```
-<p>Hello World! I’m [username]. This is my website!</p>
-```
-
-To add your introduction, copy our template and click the edit pencil icon at the top right hand corner of the `index.html` file.
-
-<img width="997" alt="edit-this-file" src="https://user-images.githubusercontent.com/18093541/63131820-0794d880-bf8d-11e9-8b3d-c096355e9389.png">
-
-
-Delete this placeholder line:
-
-```
-<p>Welcome to your first GitHub Pages website!</p>
-```
-
-Then, paste the template to line 15 and fill in the blanks.
-
-<img width="1032" alt="edit-githuboctocat-index" src="https://user-images.githubusercontent.com/18093541/63132339-c3a2d300-bf8e-11e9-8222-59c2702f6c42.png">
-
-
-When you’re done, scroll down to the `Commit changes` section near the bottom of the edit page. Add a short message explaining your change, like "Add my introduction", then click `Commit changes`.
-
-
-<img width="1030" alt="add-my-username" src="https://user-images.githubusercontent.com/18093541/63131801-efbd5480-bf8c-11e9-9806-89273f027d16.png">
-
-Once you click `Commit changes`, your changes will automatically be published on your GitHub Pages website. Refresh the page to see your new changes live in action.
-
-:tada: You just made your first commit! :tada:
-
-## Extra Credit: Keep on building!
-
-Change the placeholder Octocat gif on your GitHub Pages website by [creating your own personal Octocat emoji](https://myoctocat.com/build-your-octocat/) or [choose a different Octocat gif from our logo library here](https://octodex.github.com/). Add that image to line 12 of your `index.html` file, in place of the `<img src=` link.
-
-Want to add even more code and fun styles to your GitHub Pages website? [Follow these instructions](https://github.com/github/personal-website) to build a fully-fledged static website.
-
-![octocat](./images/create-octocat.png)
-
-## Everything you need to know about GitHub
-
-Getting started is the hardest part. If there’s anything you’d like to know as you get started with GitHub, try searching [GitHub Help](https://help.github.com). Our documentation has tutorials on everything from changing your repository settings to configuring GitHub from your command line.
